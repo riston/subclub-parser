@@ -9,6 +9,3 @@ CREATE TABLE sub.movies (
 );
 
 CREATE UNIQUE INDEX movies_movie_id_uindex ON sub.movies(movie_id);
-
-# Quert example
-# select movie_id, data->'Views' as views, data->'Name' as name, data->'Created' as created, data->'Genres' from sub.movies ORDER BY views DESC;

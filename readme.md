@@ -25,10 +25,29 @@ for pageSubtitles := range CrawlPages(1, 10) {
 }
 ```
 
+Query example to get top movies:
+
+```
+SELECT
+  movie_id as id,
+  data->'Views' as views,
+  data->'Name' as name,
+  data->'Created' as created,
+  data->'Genres' as geners
+FROM
+  sub.movies
+WHERE
+    (data->>'Views')::numeric > 1000
+  AND
+    (data->>'Created')::date > current_date - interval '60' day
+ORDER BY views DESC;
+```
+
 ## Installation
 
-Make sure you have installed Go v1.5+, package dependencies used:
+Make sure you have installed Go v1.5+ and PostgreSQL 9.5+ (using upsert query).
 
+Package dependencies used:
 - github.com/PuerkitoBio/goquery - query from HTML
 - github.com/lib/pq - PostgreSQL driver
 
